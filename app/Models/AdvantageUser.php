@@ -18,4 +18,9 @@ class AdvantageUser extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id', 'id');
+    }
 }

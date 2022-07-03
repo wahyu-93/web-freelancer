@@ -18,4 +18,34 @@ class Service extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function anvantageUsers()
+    {
+        return $this->hasMany(AdvantageUser::class);
+    }
+
+    public function taglines()
+    {
+        return $this->hasMany(Tagline::class);
+    }
+
+    public function advantageServices()
+    {
+        return $this->hasMany(AdvantageService::class);
+    }
+
+    public function thumbnails()
+    {
+        return $this->hasMany(Thumbnail::class);
+    }
+    
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

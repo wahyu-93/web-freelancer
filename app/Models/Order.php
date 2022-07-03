@@ -18,4 +18,24 @@ class Order extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function userBuyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id', 'id');
+    }
+
+    public function userFreelancer()
+    {
+        return $this->belongsTo(User::class, 'freelance_id', 'id');
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id', 'id');
+    }
+
+    public function orderStatus()
+    {
+        return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
+    }
 }

@@ -66,4 +66,24 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function detailUser()
+    {
+        return $this->hasOne(DetailUser::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    public function oderbuyers()
+    {
+        return $this->hasMany(User::class, 'buyer_id');
+    }
+
+    public function oderFreelancers()
+    {
+        return $this->hasMany(User::class, 'freelance_id');
+    }
 }
