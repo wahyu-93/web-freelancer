@@ -19,7 +19,7 @@ class CreateDetailUsersTable extends Migration
             $table->text('photo')->nullable();
             $table->string('role')->nullable();
             $table->string('contact_number')->nullable();
-            $table->text('boigrafi')->nullable();
+            $table->text('biografi')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
