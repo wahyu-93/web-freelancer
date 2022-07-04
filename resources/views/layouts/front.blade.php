@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_'. '-'. app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('includes.landing._meta')
 
-        <title>@yield('name') | SERV</title>
+        <title>@yield('title') | SERV</title>
         
         @stack('before-style')
 

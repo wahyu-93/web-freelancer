@@ -24,7 +24,6 @@
         </h1>
         <!--Description-->
         <div class="max-w-full">
-            <?php include 'components/rating.php'; ?>
             @include('components.landing.rating')
         </div>
 
