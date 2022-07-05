@@ -133,7 +133,7 @@
                     </div>
                 </div>
             </main>
-            
+
             <aside class="p-4 lg:col-span-4 md:col-span-12 md:pt-0">
                 <div class="mb-4 border rounded-lg border-serv-testimonial-border">
                     <!--horizantil margin is just for display-->
@@ -190,7 +190,7 @@
                         </table>
                     </div>
                     <div class="px-4 pb-4 booking">
-                        <a href="success.php?auth" class="block px-12 py-4 my-2 text-lg font-semibold text-center text-white bg-serv-button rounded-xl">
+                        <a href="{{ route('booking.landing', 1) }}" class="block px-12 py-4 my-2 text-lg font-semibold text-center text-white bg-serv-button rounded-xl">
                             Booking Now
                         </a>
                     </div>

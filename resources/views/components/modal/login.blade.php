@@ -4,39 +4,46 @@
     <div class="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
         <!--header-->
         <div class="p-5 rounded-t-xl text-center mt-5 mx-10">
-        <h3 class="text-2xl font-semibold">
-            Log in to Serv
-        </h3>
-        <p class="text-gray-400 mt-1 text-sm">
-            Enter your email & password to continue
-        </p>
+            <h3 class="text-2xl font-semibold">
+                Log in to Serv
+            </h3>
+
+            <p class="text-gray-400 mt-1 text-sm">
+                Enter your email & password to continue
+            </p>
         </div>
-        <form action="index.php" method="GET">
+        <form action="{{ route('login') }}" method="POST">
+            @csrf 
+            
             <!--body-->
             <div class="relative p-6 flex-auto mx-10">
                 <div class="mb-4">
-                    <label class="block text-grey-darker text-sm mb-2" for="username">
+                    <label class="block text-grey-darker text-sm mb-2" for="email">
                         Email
                     </label>
-                    <input name="email" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs" id="username" type="text" placeholder="name@domain.com">
-                    </div>
-                    <div>
+                    <input name="email" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs" id="email" type="text" placeholder="name@domain.com" required autofocus>
+                </div>
+                    
+                <div>
                     <label class="block text-grey-darker text-sm mb-2" for="password">
                         Password
                     </label>
-                    <input name="password" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3" id="password" type="password" placeholder="At least 8 characters">
-                    </div>
-                    <div class="flex items-center justify-between">
+                    <input name="password" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3" id="password" type="password" placeholder="At least 8 characters" required autocomplete="current-password">
+                </div>
+                    
+                <div class="flex items-center justify-between">            
                     <div class="inline-block text-xs text-gray-400">
                         <label class="inline-flex items-center mt-3">
                             <input type="checkbox" class="form-checkbox h-5 w-5 text-serv-button rounded border-serv-text"><span class="ml-2 text-gray-400">Remember me</span>
                         </label>
                     </div>
+                
                     <a class="inline-block align-baseline text-xs text-serv-button mt-2 font-medium" href="#">
                         Forgot Password?
-                    </a>
-                    </div>
+                    </a>    
+                </div>
             </div>
+
             <!--footer-->
             <div class="px-6 pb-6 rounded-b-xl mx-10">
                 <input type="hidden" name="auth" value="true">
