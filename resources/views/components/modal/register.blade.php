@@ -22,6 +22,10 @@
                         Full Name
                     </label>
                     <input name="name" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs" id="name" type="text" placeholder="Your name" required>
+                    
+                    @error('nmae')
+                        <p class="text-red-500 mb-3 text-sm"></p>    
+                    @enderror   
                 </div>
 
                 <div class="mb-4">
@@ -29,6 +33,10 @@
                         Email
                     </label>
                     <input name="email" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs" id="email" type="email" placeholder="name@domain.com" required>
+                    
+                    @error('email')
+                        <p class="text-red-500 mb-3 text-sm"></p>    
+                    @enderror
                 </div>
                 
                 <div>
@@ -36,6 +44,10 @@
                         Password
                     </label>
                     <input name="password" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3" id="password" type="password" placeholder="At least 8 characters" required>
+                    
+                    @error('password')
+                        <p class="text-red-500 mb-3 text-sm"></p>    
+                    @enderror
                 </div>
 
                 <div>
@@ -43,6 +55,10 @@
                         Confirm Password
                     </label>
                     <input name="password_confirmation" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3" id="password_confirmation" type="password" placeholder="At least 8 characters" required>
+                    
+                    @error('password_confitmation')
+                        <p class="text-red-500 mb-3 text-sm"></p>    
+                    @enderror
                 </div>
                 
                 <div class="flex items-center justify-between">

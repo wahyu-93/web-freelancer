@@ -22,6 +22,10 @@
                         Email
                     </label>
                     <input name="email" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs" id="email" type="text" placeholder="name@domain.com" required autofocus>
+
+                    @error('email')
+                        <p class="text-red-500 mb-3 text-sm"></p>    
+                    @enderror
                 </div>
                     
                 <div>
@@ -29,6 +33,10 @@
                         Password
                     </label>
                     <input name="password" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3" id="password" type="password" placeholder="At least 8 characters" required autocomplete="current-password">
+                    
+                    @error('password')
+                        <p class="text-red-500 mb-3 text-sm"></p>    
+                    @enderror
                 </div>
                     
                 <div class="flex items-center justify-between">            
