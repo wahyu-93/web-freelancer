@@ -14,12 +14,13 @@
                 </svg>
             </label>
             <input class="hidden" type="checkbox" id="menu-toggle" />
+            
             <div class="hidden lg:flex lg:items-center lg:w-auto w-full lg:ml-auto lg:mr-auto flex-wrap items-center text-base justify-center"
                 id="menu">
                 <nav
                     class="lg:space-x-12 space-x-0 lg:flex items-center justify-between text-base pt-8 lg:pt-0 lg:space-y-0 space-y-6">
-                    <a href="{{ route('index') }}" class="block nav-link active font-medium">Home</a>
-                    <a href="{{ route('explore.landing') }}" class="block nav-link text-serv-text">Explore</a>
+                    <a href="{{ route('index') }}" class="block nav-link {{ Request::is('/') ? 'active font-medium' : 'text-serv-text' }}">Home</a>
+                    <a href="{{ route('explore.landing') }}" class="block nav-link {{ Request::is('explore') ? 'active font-medium' : 'text-serv-text' }}">Explore</a>
                     <a href="#" class="block nav-link text-serv-text">How It Works</a>
                     <a href="#" class="block nav-link text-serv-text">Stories</a>
                     <a href="#" class="block nav-link text-serv-text">Tips</a>
