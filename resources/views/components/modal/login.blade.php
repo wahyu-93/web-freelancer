@@ -2,7 +2,7 @@
     <div class="relative w-128 my-6 mx-auto max-w-md">
     <!--content-->
     <div class="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-        <!--header-->
+        <!--header--> 
         <div class="p-5 rounded-t-xl text-center mt-5 mx-10">
             <h3 class="text-2xl font-semibold">
                 Log in to Serv
@@ -24,7 +24,7 @@
                     <input name="email" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs" id="email" type="text" placeholder="name@domain.com" required autofocus>
 
                     @error('email')
-                        <p class="text-red-500 mb-3 text-sm"></p>    
+                        <p class="text-red-500 mb-3 text-sm">{{ $message }}</p>    
                     @enderror
                 </div>
                     
@@ -35,7 +35,7 @@
                     <input name="password" class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3" id="password" type="password" placeholder="At least 8 characters" required autocomplete="current-password">
                     
                     @error('password')
-                        <p class="text-red-500 mb-3 text-sm"></p>    
+                        <p class="text-red-500 mb-3 text-sm">{{ $message }}</p>    
                     @enderror
                 </div>
                     
