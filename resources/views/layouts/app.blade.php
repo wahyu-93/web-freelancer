@@ -1,46 +1,37 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en" x-data="data()">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        @include('includes.dashboard._meta')
+        
+        @stack('before-style')
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        @include('includes.dashboard._style')
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        @stack('after-style')
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-        @livewireStyles
-
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <title>@yield('title') | SERV</title>
     </head>
-    <body class="font-sans antialiased">
-        <x-jet-banner />
+    <body class="antialiased">
+        <div class="flex h-screen bg-serv-services-bg" :class="{ 'overflow-hidden': isSideMenuOpen }">
+            @include('components.dashboard.desktop')
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+            <div x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 flex items-end bg-black bg-opacity-50 z-1 sm:items-center sm:justify-center"></div>
+            @include('components.dashboard.mobile')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+            <div class="flex flex-col flex-1 w-full">
+                @include('components.dashboard.header')
+                
+                {{-- @include('sweetalert::alert') --}}
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                @yield('content')
+            </div>
+
         </div>
 
-        @stack('modals')
+        @stack('before-script')
 
-        @livewireScripts
+        @include('includes.dashboard._script')
+
+        @stack('after-script')
     </body>
 </html>
