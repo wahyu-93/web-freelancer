@@ -1,1 +1,1 @@
-dashboard.index
+@extends('layouts.app')
