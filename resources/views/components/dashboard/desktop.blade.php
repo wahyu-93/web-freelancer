@@ -89,7 +89,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-3">
-                <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800" href="{{ route('member.profile.index') }}">
+                <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800" href="{{ route('member.profile.edit', 1) }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="24" height="24" fill="white" />
                         <circle cx="10.5" cy="5.5" r="2.75" stroke="#082431" stroke-width="1.5" />
