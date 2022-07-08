@@ -13,7 +13,7 @@ class StoreServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,17 @@ class StoreServiceRequest extends FormRequest
      */
     public function rules()
     {
+        // bisa kaini
+        // title => 'required|string|max:255
+        // atau kaini
+        // title => ['required', 'strng', 'max:255']
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:5000'],
+            'delivery_time' => ['required', 'integer', 'max:100'],
+            'revision_time' => ['required', 'integer', 'max:100'],
+            'price' => ['required', 'string'],
+            'note'  => ['nullable', 'string', 'max:5000']
         ];
     }
 }

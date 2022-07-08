@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDetailUserRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateDetailUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class UpdateDetailUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'  => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255', 'email', Rule::unique('users')->where('id', '<>', auth()->user()->id)],
         ];
     }
 }

@@ -13,7 +13,7 @@ class UpdateProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'photo' => ['nullable', 'file', 'max:1024'],
+            'role'  => ['nullable', 'string', 'max:100'],
+            'contact_number'    => ['required', 'max:12', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'biografi'  => ['nullable', 'string', 'max:5000']
         ];
     }
 }
