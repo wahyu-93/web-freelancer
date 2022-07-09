@@ -21,9 +21,10 @@
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-2 py-2 mt-2 bg-white rounded-xl">
-
-                        <form action="#" method="POST">
+                        
+                        <form action="{{ route('member.profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
 
                             <div class="">
                                 <div class="px-4 py-5 sm:p-6">
@@ -32,21 +33,26 @@
                                             <div class="flex items-center mt-1">
                                                 <span class="inline-block w-16 h-16 overflow-hidden bg-gray-100 rounded-full">
                                                     
-                                                    @if($user->detailUser->foto == null)
+                                                    @if($user->detailUser->photo == null)
                                                         <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                                                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                         </svg>
                                                     @else
-                                                        <img class="w-full h-full text-gray-300" src="{{ Storage::url($user->detailUser->foto) }}" alt="">
+                                                        <img class="w-full h-full text-gray-300" src="{{ Storage::url($user->detailUser->photo) }}" alt="">
                                                     @endif
                                                     
                                                 </span>
-                                                <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+
+                                                
+                                                <label for="photo" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                                     Choose File
-                                                </button>
-                                                <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-red-700 bg-transparent rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                                </label>
+
+                                                <input type="file" name="photo" id="photo" class="hidden" accept="image/*">
+
+                                                <a href="{{ route('member.delete.photo.profile') }}" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-red-700 bg-transparent rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                                     Delete
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
 
