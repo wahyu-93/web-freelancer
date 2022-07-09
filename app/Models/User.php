@@ -77,12 +77,12 @@ class User extends Authenticatable
         return $this->hasMany(Service::class);
     }
 
-    public function oderbuyers()
+    public function orderbuyers()
     {
         return $this->hasMany(User::class, 'buyer_id');
     }
 
-    public function oderFreelancers()
+    public function orderFreelancers()
     {
         return $this->hasMany(User::class, 'freelance_id');
     }

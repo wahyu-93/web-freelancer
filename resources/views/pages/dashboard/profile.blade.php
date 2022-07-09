@@ -31,9 +31,15 @@
                                         <div class="col-span-6">
                                             <div class="flex items-center mt-1">
                                                 <span class="inline-block w-16 h-16 overflow-hidden bg-gray-100 rounded-full">
-                                                    <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                    </svg>
+                                                    
+                                                    @if($user->detailUser->foto == null)
+                                                        <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                        </svg>
+                                                    @else
+                                                        <img class="w-full h-full text-gray-300" src="{{ Storage::url($user->detailUser->foto) }}" alt="">
+                                                    @endif
+                                                    
                                                 </span>
                                                 <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                                     Choose File
@@ -45,41 +51,65 @@
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Full Name</label>
-                                            <input placeholder="Alex Jones" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Full Name</label>
+                                            <input 
+                                                placeholder="Alex Jones" type="text" name="name" id="name" autocomplete="name" value="{{ $user->name ?? old('name') }}" 
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Role</label>
-                                            <input placeholder="Website Developer" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="role" class="block mb-3 font-medium text-gray-700 text-md">Role</label>
+                                            <input 
+                                                placeholder="Website Developer" 
+                                                type="text" name="role" id="role" autocomplete="role" value="{{ $user->detailUser->role ?? old('role') }}"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
-                                            <input placeholder="Alex.jones@gmail.com" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="email" class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
+                                            <input 
+                                                placeholder="Alex.jones@gmail.com" 
+                                                type="text" name="email" id="email" autocomplete="email" value="{{ $user->email ?? old('email') }}"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
-                                            <input placeholder="087721205555" type="number" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="contact_number" class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
+                                            <input placeholder="087721205555" type="number" name="contact_number" id="contact_number" autocomplete="contact_number" value="{{ $user->detailUser->contact_number ?? old('contact_number') }}"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
                                         <div class="col-span-6">
                                             <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Biografi</label>
                                             <textarea 
                                                 placeholder="Enter your biography here.." 
-                                                type="text" name="service-name" 
-                                                id="service-name" 
-                                                autocomplete="service-name" 
-                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" rows="4">I am a web developer and web designer. I have an Associate Degree in Software and Web Development, and I have muchexperience in programming languages, such as HTML5, CSS3, PHP, Javascript and PHP. I can use Bootstrap and WordPress. I will provide fast response and clear communication in several languages.  Feel free to contact me, thank you!
-                                            </textarea>
+                                                type="text" name="boigrafi" 
+                                                id="boigrafi" 
+                                                autocomplete="boigrafi" 
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" rows="4">{{ $user->detailUser->biografi ?? old('biografi') }}</textarea>
                                         </div>
 
                                         <div class="col-span-6">
                                             <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">My Experience</label>
-                                            <input placeholder="More than 9 years of experience" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Knowledge in the fields of interface design, marketing and etc" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Lead Developer at Sony Music for 8 Years" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        
+                                            @foreach ($userExperiences as $index => $experience)
+                                                <input 
+                                                    placeholder="More than 9 years of experience" 
+                                                    type="text" 
+                                                    name="experience-{{ $index+1 }}" id="experience-{{ $index+1 }}" autocomplete="experience-{{ $index+1 }}" 
+                                                    value="{{ $experience->experience }}" 
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            @endforeach
+                                            
+                                            @for ($i = $userExperiences->count(); $i < 3 ; $i++)
+                                                <input 
+                                                placeholder="Experience {{ $i + 1 }}" 
+                                                type="text" 
+                                                name="experience-{{ $i + 1 }}" id="experience-{{ $i + 1 }}" autocomplete="experience-{{ $i + 1 }}" 
+                                                value="" 
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            @endfor
+
                                         </div>
                                     </div>
                                 </div>
