@@ -123,26 +123,24 @@
                                         </div>
 
                                         <div class="col-span-6">
+                                            <label for="experience" class="block mb-3 font-medium text-gray-700 text-md">My Experience</label>
                                             @foreach ($userExperiences as $index => $experience)
-                                                <label for="experience-{{ $index+1 }}" class="block mb-3 font-medium text-gray-700 text-md">My Experience</label>
                                                 <input 
                                                     placeholder="More than 9 years of experience" 
                                                     type="text" 
-                                                    name="experience-{{ $index+1 }}" id="experience-{{ $index+1 }}" autocomplete="experience-{{ $index+1 }}" 
+                                                    name="{{ 'experience['.$experience->id.']' }}" id="{{ 'experience['.$experience->id.']' }}" autocomplete="{{ 'experience['.$experience->id.']' }}" 
                                                     value="{{ $experience->experience }}" 
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             @endforeach
                                             
                                             @for ($i = $userExperiences->count(); $i < 3 ; $i++)
-                                                <label for="experience-{{ $i + 1 }}" class="block mb-3 font-medium text-gray-700 text-md mt-2">My Experience</label>
                                                 <input 
-                                                placeholder="Experience {{ $i + 1 }}" 
+                                                placeholder="More than 9 years of experience" 
                                                 type="text" 
-                                                name="experience-{{ $i + 1 }}" id="experience-{{ $i + 1 }}" autocomplete="experience-{{ $i + 1 }}" 
-                                                value="" 
+                                                name="experience[]" id="experience[]" autocomplete="experience[]" 
+                                                value=""
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             @endfor
-
                                         </div>
                                     </div>
                                 </div>

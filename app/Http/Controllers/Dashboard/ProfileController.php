@@ -88,7 +88,7 @@ class ProfileController extends Controller
         $updateProfile = $updateProfileRequest->all();
         $updateDetailProfile = $updateDetailUserRequest->all();
         $file = $updateProfileRequest->file('photo');
-
+        
         if($updateProfileRequest->hasFile('photo')){
             // hapus foto lama
             $user = DetailUser::where('user_id', auth()->user()->id)->first();
@@ -98,19 +98,39 @@ class ProfileController extends Controller
             };
 
             // simpan foto baru
-            $pathFotoBaru = $file->store('public/assets/images-user/' . $user->id);
+            $pathFotoBaru = $file->store('public/assets/images-user/' . $user->user_id);
             $updateProfile['photo'] = $pathFotoBaru;
         };
         
         // ubah detail user 
-        $detailUser = DetailUser::find($id);
+        $detailUser = DetailUser::find(auth()->user()->id);
         $detailUser->update($updateProfile);
 
         // ubah user
-        $saveUser = User::find($id);
+        $saveUser = User::find(auth()->user()->id);
         $saveUser->update($updateDetailProfile);
         
         // ubah experience
+        foreach($updateDetailProfile['experience'] as $key => $item){
+            if($item != null){
+                $exp = ExperienceUser::find($key);
+                if($exp){
+                    $exp->experience = $item;
+                    $exp->save();
+                }
+                else {
+                    if ($item != null){
+                        ExperienceUser::create([
+                            'detail_user_id' => $detailUser->id,
+                            'experience'     => $item
+                        ]);
+                    }
+                }
+            }
+            else{
+                ExperienceUser::destroy($key);
+            }
+        };
                 
         toast()->success('Update Profile Has Been Success');
         return back();  
