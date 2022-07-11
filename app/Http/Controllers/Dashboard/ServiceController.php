@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -14,7 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.service.index');
+        $services = Service::where('id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('pages.dashboard.service.index', compact('services'));
     }
 
     /**
