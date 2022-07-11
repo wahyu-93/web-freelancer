@@ -40,9 +40,9 @@
                                                     @else
                                                         <img class="w-full h-full text-gray-300" src="{{ Storage::url($user->detailUser->photo) }}" alt="">
                                                     @endif
+
                                                     
                                                 </span>
-
                                                 
                                                 <label for="photo" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                                     Choose File
@@ -54,6 +54,10 @@
                                                     Delete
                                                 </a>
                                             </div>
+
+                                            @error('photo')
+                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
@@ -61,6 +65,10 @@
                                             <input 
                                                 placeholder="Alex Jones" type="text" name="name" id="name" autocomplete="name" value="{{ $user->name ?? old('name') }}" 
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @error('name')
+                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
@@ -69,6 +77,10 @@
                                                 placeholder="Website Developer" 
                                                 type="text" name="role" id="role" autocomplete="role" value="{{ $user->detailUser->role ?? old('role') }}"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @error('role')
+                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
@@ -77,28 +89,42 @@
                                                 placeholder="Alex.jones@gmail.com" 
                                                 type="text" name="email" id="email" autocomplete="email" value="{{ $user->email ?? old('email') }}"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+
+                                            @error('email')
+                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="md:col-span-6 lg:col-span-3">
                                             <label for="contact_number" class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
-                                            <input placeholder="087721205555" type="number" name="contact_number" id="contact_number" autocomplete="contact_number" value="{{ $user->detailUser->contact_number ?? old('contact_number') }}"
+                                            <input 
+                                                placeholder="087721205555" 
+                                                type="number" name="contact_number" id="contact_number" autocomplete="contact_number" 
+                                                value="{{ $user->detailUser->contact_number ?? old('contact_number') }}"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+
+                                            @error('contact_number')
+                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Biografi</label>
+                                            <label for="biografi" class="block mb-3 font-medium text-gray-700 text-md">Biografi</label>
                                             <textarea 
                                                 placeholder="Enter your biography here.." 
-                                                type="text" name="boigrafi" 
-                                                id="boigrafi" 
-                                                autocomplete="boigrafi" 
+                                                type="text" name="biografi" 
+                                                id="biografi" 
+                                                autocomplete="biografi" 
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" rows="4">{{ $user->detailUser->biografi ?? old('biografi') }}</textarea>
+                                            
+                                            @error('biografi')
+                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">My Experience</label>
-                                        
                                             @foreach ($userExperiences as $index => $experience)
+                                                <label for="experience-{{ $index+1 }}" class="block mb-3 font-medium text-gray-700 text-md">My Experience</label>
                                                 <input 
                                                     placeholder="More than 9 years of experience" 
                                                     type="text" 
@@ -108,6 +134,7 @@
                                             @endforeach
                                             
                                             @for ($i = $userExperiences->count(); $i < 3 ; $i++)
+                                                <label for="experience-{{ $i + 1 }}" class="block mb-3 font-medium text-gray-700 text-md mt-2">My Experience</label>
                                                 <input 
                                                 placeholder="Experience {{ $i + 1 }}" 
                                                 type="text" 

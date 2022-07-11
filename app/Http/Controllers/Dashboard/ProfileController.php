@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\Profile\UpdateDetailUserRequest;
 use App\Http\Requests\Dashboard\Profile\UpdateProfileRequest;
 use App\Models\DetailUser;
 use App\Models\ExperienceUser;
@@ -81,10 +82,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $updateProfileRequest, $id)
+    public function update(UpdateProfileRequest $updateProfileRequest, UpdateDetailUserRequest $updateDetailUserRequest, $id)
     {
         // ubah foto
         $updateProfile = $updateProfileRequest->all();
+        $updateDetailProfile = $updateDetailUserRequest->all();
         $file = $updateProfileRequest->file('photo');
 
         if($updateProfileRequest->hasFile('photo')){
@@ -99,10 +101,17 @@ class ProfileController extends Controller
             $pathFotoBaru = $file->store('public/assets/images-user/' . $user->id);
             $updateProfile['photo'] = $pathFotoBaru;
         };
-
+        
+        // ubah detail user 
         $detailUser = DetailUser::find($id);
         $detailUser->update($updateProfile);
+
+        // ubah user
+        $saveUser = User::find($id);
+        $saveUser->update($updateDetailProfile);
         
+        // ubah experience
+                
         toast()->success('Update Profile Has Been Success');
         return back();  
     }
