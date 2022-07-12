@@ -74,9 +74,13 @@
                                             <input placeholder="Keunggulan 1" type="text" name="advantages[]" id="advantages" autocomplete="advantages" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <input placeholder="Keunggulan 2" type="text" name="advantages[]" id="advantages" autocomplete="advantages" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <input placeholder="Keunggulan 3" type="text" name="advantages[]" id="advantages" autocomplete="advantages" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <div id="newServicesRow"></div>
+                                            
+                                            <div id="newAdvantagesRow"></div>
 
-                                            <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addServicesRow">
+                                            <button 
+                                                type="button" 
+                                                id="addAdvantagesRow"
+                                                class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                                 Tambahkan Keunggulan +
                                             </button>
                                         </div>
@@ -134,7 +138,9 @@
                                             <input placeholder="Keunggulan 1" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <input placeholder="Keunggulan 2" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                           
                                             <div id="newThumbnailRow"></div>
+                                           
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addThumbnailRow">
                                                 Tambahkan Gambar +
                                             </button>
@@ -145,8 +151,12 @@
                                             <input placeholder="Keunggulan 1" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <input placeholder="Keunggulan 2" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <input placeholder="Keunggulan 3" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <div id="newAdvantagesRow"></div>
-                                            <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addAdvantagesRow">
+                                            
+                                            <div id="newServicesRow"></div> 
+                                            
+                                            <button 
+                                                type="button" id="addServicesRow"
+                                                class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                                 Tambahkan Keunggulan +
                                             </button>
                                         </div>

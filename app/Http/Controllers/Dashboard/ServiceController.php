@@ -55,10 +55,10 @@ class ServiceController extends Controller
         $storeService['user_id'] = auth()->user()->id;
         $service = Service::create($storeService);
         
-        // simpan advantages User
+        // simpan advantages Service
         foreach($storeService['advantages'] as $key => $item){
             if($item != null){
-                $saveAdvantages[] = [
+                $saveService[] = [
                     'service_id'    => $service->id,
                     'advantage'     => $item,
                     'created_at'    => now(),
@@ -68,12 +68,12 @@ class ServiceController extends Controller
         
         };
 
-        AdvantageUser::insert($saveAdvantages);
+        AdvantageService::insert($saveService);
 
-        // simpan advantages service
+        // simpan advantages user
         foreach($storeService['services'] as $key => $item){
             if($item != null){
-                $saveServices[] = [
+                $saveAdvantageUser[] = [
                     'service_id'    => $service->id,
                     'advantage'     => $item,
                     'created_at'    => now(),
@@ -82,7 +82,7 @@ class ServiceController extends Controller
             };
         };
 
-        AdvantageService::insert($saveServices);
+        AdvantageUser::insert($saveAdvantageUser);
 
         // save thumbnail
         foreach($storeService['thumbnails'] as $key => $item ){
@@ -137,7 +137,12 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view('pages.dashboard.service.edit');
+        $advantageUsers = AdvantageUser::where('service_id', $service->id)->get();
+        $advantageServices = AdvantageService::where('service_id', $service->id)->get();
+        $thumbnails = Thumbnail::where('service_id', $service->id)->get();
+        $taglines = Tagline::where('service_id', $service->id)->get();
+
+        return view('pages.dashboard.service.edit', compact('service', 'advantageUsers', 'advantageServices', 'thumbnails', 'taglines'));
     }
 
     /**
@@ -149,7 +154,7 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
     }
 
     /**
