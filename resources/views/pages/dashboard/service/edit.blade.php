@@ -144,7 +144,7 @@
                                         <div class="col-span-6">
                                             <label for="thumbnails" class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Service Feeds</label>
                                             
-                                            <div class="grid grid-cols lg:grid-cols-4 md:grid-cols-2 gap-4">
+                                            <div class="flex justify-around">
                                                 @forelse ($thumbnails as $thumbnail)
                                                     <div class="mb-2">
                                                         <img src="{{ Storage::url($thumbnail->thumbnail) }}" alt="" class="w-20 h-20 object-cover inline object-center">
@@ -159,8 +159,8 @@
                                                     <input placeholder="Keunggulan 2" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                                     <input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">    
                                                 @endforelse
-                                                
                                             </div>
+                                                
                                             <div id="newThumbnailRow"></div>
                                             
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addThumbnailRow">
@@ -170,9 +170,18 @@
                                         
                                         <div class="col-span-6">
                                             <label for="services" class="block mb-3 font-medium text-gray-700 text-md">Keunggulan kamu</label>
-                                            <input placeholder="Keunggulan 1" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 2" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 3" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @forelse ($advantageUsers as $item)
+                                                <input 
+                                                    placeholder="Keunggulan 1" 
+                                                    type="text" name="{{ 'services['.$item->id.']' }}" id="services" autocomplete="services" value="{{ $item->advantage }}"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                
+                                            @empty
+                                                <input placeholder="Keunggulan 1" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                <input placeholder="Keunggulan 2" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                <input placeholder="Keunggulan 3" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">    
+                                            @endforelse                                            
                                             
                                             <div id="newServicesRow"></div>
                                             
@@ -197,7 +206,15 @@
                                         
                                         <div class="col-span-6">
                                             <label for="tagline" class="block mb-3 font-medium text-gray-700 text-md">Tagline <span class="text-gray-400">(Optional)</span></label>
+                                            @foreach ($taglines as $tagline)
+                                                <input 
+                                                    placeholder="Tambah Tagline" 
+                                                    type="text" name="{{ 'tagline['.$tagline->id.']' }}" id="tagline" autocomplete="tagline" value="{{ $tagline->tagline }}" 
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">   
+                                            @endforeach
+                                            
                                             <div id="newTaglineRow"></div>
+                                            
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addTaglineRow">
                                                 Tambahkan Tagline +
                                             </button>
