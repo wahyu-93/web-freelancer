@@ -36,63 +36,104 @@
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-2 py-2 mt-2 bg-white rounded-xl">
-
-                        <form action="{{ route('member.service.store') }}" method="POST">
+                        <form action="{{ route('member.service.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="">
                                 <div class="px-4 py-5 sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Judul Service</label>
-                                            <input placeholder="Service apa yang ingin kamu tawarkan?" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Judul Service</label>
+                                            <input 
+                                                placeholder="Service apa yang ingin kamu tawarkan?" 
+                                                type="text" name="title" id="title" autocomplete="title" value="{{ old('title') }}" 
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @error('title')
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Deskripsi Service</label>
-                                            <input placeholder="Jelaskan Service apa yang kamu tawarkan?" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="description" class="block mb-3 font-medium text-gray-700 text-md">Deskripsi Service</label>
+                                            <input 
+                                                placeholder="Jelaskan Service apa yang kamu tawarkan?" 
+                                                type="text" name="description" id="description" autocomplete="description" value="{{ old('description') }}"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @error('description')
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-2 font-medium text-gray-700 text-md">Keunggulan Service kamu</label>
+                                            <label for="advantages" class="block mb-2 font-medium text-gray-700 text-md">Keunggulan Service kamu</label>
                                             <p class="block mb-3 text-sm text-gray-700">
                                                 Hal apa aja yang didapakan dari service kamu?
                                             </p>
-                                            <input placeholder="Keunggulan 1" type="text" name="advantages[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 2" type="text" name="advantages[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 3" type="text" name="advantages[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 1" type="text" name="advantages[]" id="advantages" autocomplete="advantages" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 2" type="text" name="advantages[]" id="advantages" autocomplete="advantages" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 3" type="text" name="advantages[]" id="advantages" autocomplete="advantages" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <div id="newServicesRow"></div>
+
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addServicesRow">
                                                 Tambahkan Keunggulan +
                                             </button>
                                         </div>
                                         
                                         <div class="col-span-6 -mb-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Estimasi Service & Jumlah Revisi</label>
+                                            <label for="estimasi-service-revisi" class="block mb-3 font-medium text-gray-700 text-md">Estimasi Service & Jumlah Revisi</label>
                                         </div>
                                         
                                         <div class="col-span-6 sm:col-span-3">
-                                            <select id="estimation" name="estimation" autocomplete="estimation" class="block w-full px-3 py-3 pr-10 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <select id="delivery_time" name="delivery_time" autocomplete="delivery_time" class="block w-full px-3 py-3 pr-10 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                 <option>Butuh Berapa hari service kamu selesai?</option>
+                                                <option value="2">2 Hari</option>
+                                                <option value="4">4 Hari</option>
+                                                <option value="8">8 Hari</option>
+                                                <option value="10">10 Hari</option>
+                                                <option value="12">12 Hari</option>
+                                                <option value="24">24 Hari</option>
+                                                <option value="36">36 Hari</option>
                                             </select>
+
+                                            @error('delivery_time')
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         
                                         <div class="col-span-6 sm:col-span-3">
-                                            <select id="estimation" name="estimation" autocomplete="estimation" class="block w-full px-3 py-3 pr-10 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <select id="revision_time" name="revision_time" autocomplete="revision_time" class="block w-full px-3 py-3 pr-10 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                 <option>Maksimal Revisi service kamu</option>
+                                                <option value="2">2 Kali</option>
+                                                <option value="4">4 Kali</option>
+                                                <option value="8">8 Kali</option>
+                                                <option value="10">10 Kali</option>
+                                                <option value="12">12 Kali</option>
                                             </select>
+
+                                            @error('revision_time')
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Harga Service Kamu</label>
-                                            <input placeholder="Total Harga Service Kamu" type="number" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="price" class="block mb-3 font-medium text-gray-700 text-md">Harga Service Kamu</label>
+                                            <input 
+                                                placeholder="Total Harga Service Kamu" 
+                                                type="number" name="price" id="price" autocomplete="price" value="{{ old('price') }}" 
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @error('price')
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Service Feeds</label>
-                                            <input placeholder="Keunggulan 1" type="file" name="thumbnails[]" id="service-name" autocomplete="service-name" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 2" type="file" name="thumbnails[]" id="service-name" autocomplete="service-name" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="service-name" autocomplete="service-name" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="thumbnails" class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Service Feeds</label>
+                                            <input placeholder="Keunggulan 1" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 2" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <div id="newThumbnailRow"></div>
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addThumbnailRow">
                                                 Tambahkan Gambar +
@@ -100,10 +141,10 @@
                                         </div>
                                         
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Keunggulan kamu</label>
-                                            <input placeholder="Keunggulan 1" type="text" name="services[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 2" type="text" name="services[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            <input placeholder="Keunggulan 3" type="text" name="services[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="services" class="block mb-3 font-medium text-gray-700 text-md">Keunggulan kamu</label>
+                                            <input placeholder="Keunggulan 1" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 2" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <input placeholder="Keunggulan 3" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <div id="newAdvantagesRow"></div>
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addAdvantagesRow">
                                                 Tambahkan Keunggulan +
@@ -111,12 +152,19 @@
                                         </div>
                                         
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Note <span class="text-gray-400">(Optional)</span></label>
-                                            <input placeholder="Hal yang ingin disampaikan oleh kamu?" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            <label for="note" class="block mb-3 font-medium text-gray-700 text-md">Note <span class="text-gray-400">(Optional)</span></label>
+                                            <input 
+                                                placeholder="Hal yang ingin disampaikan oleh kamu?" 
+                                                type="text" name="note" id="note" autocomplete="note" value="{{ old('note') }}"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                            
+                                            @error('note')
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         
                                         <div class="col-span-6">
-                                            <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Tagline <span class="text-gray-400">(Optional)</span></label>
+                                            <label for="tagline" class="block mb-3 font-medium text-gray-700 text-md">Tagline <span class="text-gray-400">(Optional)</span></label>
                                             <div id="newTaglineRow"></div>
                                             <button type="button" class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="addTaglineRow">
                                                 Tambahkan Tagline +
@@ -150,7 +198,7 @@
         // add row
         $("#addAdvantagesRow").click(function() {
             var html = '';
-            html += '<input placeholder="Keunggulan" type="text" name="advantages[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
+            html += '<input placeholder="Keunggulan" type="text" name="advantages[]" id="adavantages-user" autocomplete="adavantages-user" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
 
             $('#newAdvantagesRow').append(html);
         });
@@ -165,7 +213,7 @@
         // add row
         $("#addServicesRow").click(function() {
             var html = '';
-            html += '<input placeholder="Keunggulan" type="text" name="services[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
+            html += '<input placeholder="Keunggulan" type="text" name="services[]" id="services" autocomplete="services" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
 
             $('#newServicesRow').append(html);
         });
@@ -180,7 +228,7 @@
         // add row
         $("#addTaglineRow").click(function() {
             var html = '';
-            html += '<input placeholder="Keunggulan" type="text" name="tagline[]" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
+            html += '<input placeholder="Tambah Tagline" type="text" name="tagline[]" id="tagline" autocomplete="tagline" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
 
             $('#newTaglineRow').append(html);
         });
@@ -195,7 +243,7 @@
         // add row
         $("#addThumbnailRow").click(function() {
             var html = '';
-            html += '<input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="service-name" autocomplete="service-name" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
+            html += '<input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
 
             $('#newThumbnailRow').append(html);
         });

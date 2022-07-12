@@ -56,7 +56,7 @@
                                             </div>
 
                                             @error('photo')
-                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                             @enderror
                                         </div>
 
@@ -67,7 +67,7 @@
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             
                                             @error('name')
-                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                             @enderror
                                         </div>
 
@@ -79,7 +79,7 @@
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             
                                             @error('role')
-                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                             @enderror
                                         </div>
 
@@ -91,7 +91,7 @@
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
                                             @error('email')
-                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                             @enderror
                                         </div>
 
@@ -104,7 +104,7 @@
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
                                             @error('contact_number')
-                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                             @enderror
                                         </div>
 
@@ -118,7 +118,7 @@
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" rows="4">{{ $user->detailUser->biografi ?? old('biografi') }}</textarea>
                                             
                                             @error('biografi')
-                                                <p class="text-rose-500 text-sm mt-2">{{ $message }}</p>
+                                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                             @enderror
                                         </div>
 
