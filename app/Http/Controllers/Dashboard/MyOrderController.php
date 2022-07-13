@@ -3,6 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\MyOrder\UpdateMyOrderRequest;
+use App\Models\AdvantageService;
+use App\Models\AdvantageUser;
+use App\Models\Order;
+use App\Models\Service;
+use App\Models\Tagline;
+use App\Models\Thumbnail;
 use Illuminate\Http\Request;
 
 class MyOrderController extends Controller
@@ -14,7 +21,8 @@ class MyOrderController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.order.index');
+        $orders = Order::where('freelance_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('pages.dashboard.order.index', compact('orders'));
     }
 
     /**
@@ -24,7 +32,7 @@ class MyOrderController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +43,7 @@ class MyOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -44,9 +52,16 @@ class MyOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        return view('pages.dashboard.order.detail');
+        $service = Service::where('id', $order->service_id)->first();
+        $thumbnails = Thumbnail::where('service_id', $service->id)->get();
+        $advantageServices = AdvantageService::where('service_id', $service->id)->get();
+        $advantageUsers = AdvantageUser::where('service_id', $service->id)->get();
+        $tagline = Tagline::where('service_id', $service->id)->get();
+
+
+        return view('pages.dashboard.order.detail',compact('service', 'thubnails', 'advantageServices', 'advantageUsers', 'tagline'));
     }
 
     /**
@@ -55,9 +70,9 @@ class MyOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        return view('pages.dashboard.order.edit');
+        return view('pages.dashboard.order.edit', compact('order'));
     }
 
     /**
@@ -67,9 +82,9 @@ class MyOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMyOrderRequest $request, Order $order)
     {
-        //
+        // simpan file yang dikirim kena mhadang frontendnya kyapa
     }
 
     /**
@@ -80,16 +95,24 @@ class MyOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404)
     }
 
-    public function accept($id)
+    public function accept(Order $order)
     {
+        $order->order_status_id = 2;
+        $order->save()
 
+        toast()->success('Accept Order Has Been Success');
+        return back();
     }
 
-    public function reject($id)
-    {
-        
+    public function reject(Order $order)
+    {   
+        $order->order_status_id = 3;
+        $order->save()
+
+        toast()->success('Reject Order Has Been Success');
+        return back();
     }
 }

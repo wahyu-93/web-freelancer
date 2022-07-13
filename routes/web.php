@@ -52,8 +52,8 @@ Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sa
     Route::resource('request',RequestController::class);
 
     // order
-    Route::get('accept/order/{id}', [MyOrderController::class, 'accept'])->name('accept.order');
-    Route::get('reject/order/{id}', [MyOrderController::class, 'reject'])->name('reject.order');
+    Route::get('accept/order/{order}', [MyOrderController::class, 'accept'])->name('accept.order');
+    Route::get('reject/order/{order}', [MyOrderController::class, 'reject'])->name('reject.order');
     Route::resource('order', MyOrderController::class);
 
     // profile
