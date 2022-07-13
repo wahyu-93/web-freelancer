@@ -144,13 +144,13 @@
                                         <div class="col-span-6">
                                             <label for="thumbnails" class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Service Feeds</label>
                                             
-                                            <div class="flex justify-around">
+                                            <div class="grid grid-cols lg:grid-cols-3 md:grid-cols-3 gap-4">
                                                 @forelse ($thumbnails as $thumbnail)
                                                     <div class="mb-2">
                                                         <img src="{{ Storage::url($thumbnail->thumbnail) }}" alt="" class="w-20 h-20 object-cover inline object-center">
                                                         <input 
                                                             placeholder="Keunggulan 1" 
-                                                            type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" 
+                                                            type="file" name="{{ 'thumbnails['.$thumbnail->id.']' }}" id="thumbnails" autocomplete="thumbnails" accept="image/*" 
                                                             class="block w-full py-3 pl-5 mt-1 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
                                                     </div>
@@ -292,7 +292,7 @@
         // add row
         $("#addThumbnailRow").click(function() {
             var html = '';
-            html += '<input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
+            html += '<input placeholder="Keunggulan 3" type="file" name="thumbnails[]" id="thumbnails" autocomplete="thumbnails" accept="image/*" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
 
             $('#newThumbnailRow').append(html);
         });

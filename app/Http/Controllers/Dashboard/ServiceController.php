@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Service\StoreServiceRequest;
+use App\Http\Requests\Dashboard\Service\UpdateServiceRequest;
 use App\Models\AdvantageService;
 use App\Models\AdvantageUser;
 use App\Models\Service;
@@ -11,6 +12,7 @@ use App\Models\Tagline;
 use App\Models\Thumbnail;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -152,9 +154,103 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
-        dd($request);
+        $data = $request->all();
+       
+        // ubah service
+        $service->update($data);
+
+        // ubah advantage service
+        foreach($data['advantages'] as $key => $item){
+            if ($item != null ){
+                if($advantageService = AdvantageService::find($key)){
+                    $advantageService->advantage = $item;
+                    $advantageService->update();
+                }
+                else{
+                    AdvantageService::create([
+                        'service_id'    => $service->id,
+                        'advantage'     => $item
+                    ]);
+                };
+            }
+            else {
+                if($advantageService = AdvantageService::find($key)){
+                    $advantageService->delete();
+                };
+            };
+        };
+    
+        // ubah advantage user
+        foreach($data['services'] as $key => $item){
+            if ($item != null ){
+                if($advantageUser = AdvantageUser::find($key)){
+                    $advantageUser->advantage = $item;
+                    $advantageUser->update();
+                }
+                else{
+                    AdvantageUser::create([
+                        'service_id'    => $service->id,
+                        'advantage'     => $item
+                    ]);
+                };
+            }
+            else {
+                if($advantageUser = AdvantageUser::find($key)){
+                    $advantageUser->delete();
+                };
+            };
+        };
+
+        // ubah thumbnail
+        if($request->hasFile('thumbnails')){
+            foreach($data['thumbnails'] as $key => $item){
+                $updateThumbnail = Thumbnail::find($key);
+                if ($updateThumbnail){
+                    // hapus foto lama 
+                    if(Storage::exists($updateThumbnail->thumbnail)){
+                        Storage::delete($updateThumbnail->thumbnail);
+                    };
+    
+                    // simpan foto baru dan update path dbnya     
+                    $newPath = $item->store('public/assets/thumbnails/' . $service->id);
+                    $updateThumbnail->thumbnail = $newPath;
+                    $updateThumbnail->update();
+                }
+                else{
+                    $newPath = $item->store('public/assets/thumbnails/' . $service->id);
+                    Thumbnail::create([
+                        'service_id'    => $service->id,
+                        'thumbnail'     => $newPath,
+                    ]);
+                };
+            };
+        };
+
+        // ubah tagline
+        foreach($data['tagline'] as $key => $item){
+            if ($item != null ){
+                if($tagline = Tagline::find($key)){
+                    $tagline->tagline = $item;
+                    $tagline->update();
+                }
+                else{
+                    tagline::create([
+                        'service_id' => $service->id,
+                        'tagline'    => $item
+                    ]);
+                };
+            }
+            else {
+                if($tagline = tagline::find($key)){
+                    $tagline->delete();
+                };
+            };
+        };
+        
+        toast()->success('Update Has Been Success');
+        return redirect()->route('member.service.index');
     }
 
     /**
