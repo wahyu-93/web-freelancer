@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdvantageService;
+use App\Models\AdvantageUser;
+use App\Models\Service;
+use App\Models\Tagline;
+use App\Models\Thumbnail;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -14,7 +19,9 @@ class LandingController extends Controller
      */
     public function index()
     {
-        return view('pages.landing.index');
+        $services = Service::orderBy('created_at', 'desc')->get();
+
+        return view('pages.landing.index', compact('services'));
     }
 
     /**
@@ -24,7 +31,7 @@ class LandingController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +42,7 @@ class LandingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -46,7 +53,7 @@ class LandingController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -57,7 +64,7 @@ class LandingController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -69,7 +76,7 @@ class LandingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -80,17 +87,25 @@ class LandingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 
     public function explore()
     {
-        return view('pages.landing.explore');
+        $services = Service::orderBy('created_at', 'desc')->get();
+
+        return view('pages.landing.explore', compact('services'));
     }
 
     public function detail($id)
     {
-        return view('pages.landing.detail');
+        $service = Service::where('id', $id)->first();
+        $advantageUsers = AdvantageUser::where('service_id', $service->id)->get();
+        $advantageServices = AdvantageService::where('service_id', $service->id)->get();
+        $thumbnails = Thumbnail::where('service_id', $service->id)->get();
+        $taglines = Tagline::where('service_id', $service->id)->get();
+
+        return view('pages.landing.detail', compact('service', 'advantageUsers', 'advantageServices', 'thumbnails', 'taglines'));
     }
 
     public function booking($id)

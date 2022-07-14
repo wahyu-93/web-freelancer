@@ -58,63 +58,71 @@ class ServiceController extends Controller
         $service = Service::create($storeService);
         
         // simpan advantages Service
-        foreach($storeService['advantages'] as $key => $item){
-            if($item != null){
-                $saveService[] = [
-                    'service_id'    => $service->id,
-                    'advantage'     => $item,
-                    'created_at'    => now(),
-                    'updated_at'    => now()
-                ];
+        if(isset($storeService['advantages'])){
+            foreach($storeService['advantages'] as $key => $item){
+                if($item != null){
+                    $saveService[] = [
+                        'service_id'    => $service->id,
+                        'advantage'     => $item,
+                        'created_at'    => now(),
+                        'updated_at'    => now()
+                    ];
+                };
+            
             };
-        
-        };
+            AdvantageService::insert($saveService);
+        }
 
-        AdvantageService::insert($saveService);
 
         // simpan advantages user
-        foreach($storeService['services'] as $key => $item){
-            if($item != null){
-                $saveAdvantageUser[] = [
-                    'service_id'    => $service->id,
-                    'advantage'     => $item,
-                    'created_at'    => now(),
-                    'updated_at'    => now()
-                ];
+        if(isset($storeService['services'])){
+            foreach($storeService['services'] as $key => $item){
+                if($item != null){
+                    $saveAdvantageUser[] = [
+                        'service_id'    => $service->id,
+                        'advantage'     => $item,
+                        'created_at'    => now(),
+                        'updated_at'    => now()
+                    ];
+                };
             };
-        };
+            AdvantageUser::insert($saveAdvantageUser);
+        }
 
-        AdvantageUser::insert($saveAdvantageUser);
 
         // save thumbnail
-        foreach($storeService['thumbnails'] as $key => $item ){
-            if($item != null){
-                $path = $item->store('public/assets/thumbnails/' . $service->id);
-                
-                $saveThumbnails[] = [
-                    'service_id'    => $service->id, 
-                    'thumbnail'     => $path,
-                    'created_at'    => now(),
-                    'updated_at'    => now()
-                ];
+        if(isset($storeService['thumbnails'])){
+            foreach($storeService['thumbnails'] as $key => $item ){
+                if($item != null){
+                    $path = $item->store('public/assets/thumbnails/' . $service->id);
+                    
+                    $saveThumbnails[] = [
+                        'service_id'    => $service->id, 
+                        'thumbnail'     => $path,
+                        'created_at'    => now(),
+                        'updated_at'    => now()
+                    ];
+                };
             };
-        };
+            Thumbnail::insert($saveThumbnails);
+        }
 
-        Thumbnail::insert($saveThumbnails);
 
         // save tagline
-        foreach($storeService['tagline'] as $key => $item){
-            if($item != null){
-                $saveTagline[] = [
-                    'service_id'    => $service->id,
-                    'tagline'       => $item,
-                    'created_at'    => now(),
-                    'updated_at'    => now()
-                ];
+        if(isset($storeService['tagline'])){
+            foreach($storeService['tagline'] as $key => $item){
+                if($item != null){
+                    $saveTagline[] = [
+                        'service_id'    => $service->id,
+                        'tagline'       => $item,
+                        'created_at'    => now(),
+                        'updated_at'    => now()
+                    ];
+                };
             };
-        };
+            Tagline::insert($saveTagline);
+        }
 
-        Tagline::insert($saveTagline);
         
         toast()->success('Save Has Been Success');
         return redirect()->route('member.service.index');
