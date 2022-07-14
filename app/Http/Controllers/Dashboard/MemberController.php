@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -14,7 +15,22 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.index');
+
+        $orders = Order::where('freelance_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $progress  =  Order::where('freelance_id', auth()->user()->id)
+                            ->where('order_status_id', '2')
+                            ->count();
+
+        $completed  =  Order::where('freelance_id', auth()->user()->id)
+                            ->where('order_status_id', '1')
+                            ->count();
+
+        $freelancer = Order::where('buyer_id', auth()->user()->id)
+                            ->where('order_status_id', '2')
+                            ->distinct('freelance_id')
+                            ->count();
+                
+        return view('pages.dashboard.index', compact('orders', 'progress', 'completed', 'freelancer'));
     }
 
     /**
@@ -24,7 +40,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+       return abort(404);
     }
 
     /**
@@ -35,7 +51,7 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       return abort(404);
     }
 
     /**
@@ -46,7 +62,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+       return abort(404);
     }
 
     /**
@@ -57,7 +73,7 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+       return abort(404);
     }
 
     /**
@@ -69,7 +85,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       return abort(404);
     }
 
     /**
@@ -80,6 +96,6 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+       return abort(404);
     }
 }
