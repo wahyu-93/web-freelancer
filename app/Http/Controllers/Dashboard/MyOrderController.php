@@ -95,13 +95,13 @@ class MyOrderController extends Controller
      */
     public function destroy($id)
     {
-        return abort(404)
+        return abort(404);
     }
 
     public function accept(Order $order)
     {
         $order->order_status_id = 2;
-        $order->save()
+        $order->save();
 
         toast()->success('Accept Order Has Been Success');
         return back();
@@ -110,7 +110,7 @@ class MyOrderController extends Controller
     public function reject(Order $order)
     {   
         $order->order_status_id = 3;
-        $order->save()
+        $order->save();
 
         toast()->success('Reject Order Has Been Success');
         return back();
