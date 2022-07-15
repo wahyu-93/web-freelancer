@@ -110,6 +110,7 @@ class LandingController extends Controller
 
     public function booking($id)
     {   
+        
         return view('pages.landing.booking');
     }
 
