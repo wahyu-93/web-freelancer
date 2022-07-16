@@ -60,9 +60,18 @@
                         <use xlink:href="#image0" transform="scale(0.002)"/>
                     </pattern>
                     <!-- Gambar kiri -->
-                    <image id="image0" width="500" height="500" xlink:href="https://randomuser.me/api/portraits/men/40.jpg"/>
+                    @if ($order->userBuyer()->first()->detailUser->photo != NULL)
+                        <image id="image0" width="500" height="500" xlink:href="{{ Storage::url($order->userBuyer()->first()->detailUser->photo) }}"/>
+                    @else
+                        <image id="image0" width="500" height="500" xlink:href="https://randomuser.me/api/portraits/lego/5.jpg"/>
+                    @endif
+                
                     <!-- Gambar kanan -->
-                    <image id="image1" width="500" height="500" xlink:href="https://randomuser.me/api/portraits/men/97.jpg"/>
+                    @if ($order->userFreelancer()->first()->detailUser->photo != NULL)
+                        <image id="image1" width="500" height="500" xlink:href="{{ Storage::url($order->userFreelancer()->first()->detailUser->photo) }}"/>
+                    @else
+                        <image id="image1" width="500" height="500" xlink:href="https://randomuser.me/api/portraits/lego/5.jpg"/>
+                    @endif
                 </defs>
             </svg>
 
