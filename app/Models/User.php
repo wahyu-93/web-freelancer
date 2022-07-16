@@ -79,11 +79,11 @@ class User extends Authenticatable
 
     public function orderbuyers()
     {
-        return $this->hasMany(User::class, 'id', 'buyer_id');
+        return $this->hasMany(Order::class, 'buyer_id');
     }
 
     public function orderFreelancers()
     {
-        return $this->hasMany(User::class, 'id', 'freelance_id');
+        return $this->hasMany(Order::class, 'freelance_id');
     }
 }

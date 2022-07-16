@@ -20,6 +20,7 @@ class RequestController extends Controller
     public function index()
     {
         $orders = Order::where('buyer_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        
         return view('pages.dashboard.request.index', compact('orders'));
     }
 

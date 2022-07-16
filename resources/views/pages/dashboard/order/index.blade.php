@@ -11,7 +11,7 @@
                         My Orders
                     </h2>
                     <p class="text-sm text-gray-400">
-                        {{ auth()->user()->orderFreelancers()->count() }} Total Orders
+                        {{ auth()->user()->orderBuyers()->count() }} Total Orders
                     </p>
                 </div>
                 <div class="col-span-4 lg:text-right">
@@ -34,139 +34,90 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
-                                <tr class="text-gray-700 border-b">
-                                    <td class="px-1 py-5 text-sm w-2/8">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full" src="{{ url('https://randomuser.me/api/portraits/men/6.jpg') }}" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-black">Alexa Sara</p>
-                                                <p class="text-sm text-gray-400">UI Designer</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="w-2/6 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded" src="{{ url('https://randomuser.me/api/portraits/men/3.jpg') }}" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-black">
-                                                    Design WordPress <br>E-Commerce Modules
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
+                                @forelse ($orders as $order)
+                                    <tr class="text-gray-700 border-b">
+                                        <td class="px-1 py-5 text-sm w-2/8">
+                                            <div class="flex items-center text-sm">
+                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
 
-                                    <td class="px-1 py-5 text-xs text-red-500">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline mb-1">
-                                            <path d="M7.0002 12.8332C10.2219 12.8332 12.8335 10.2215 12.8335 6.99984C12.8335 3.77818 10.2219 1.1665 7.0002 1.1665C3.77854 1.1665 1.16687 3.77818 1.16687 6.99984C1.16687 10.2215 3.77854 12.8332 7.0002 12.8332Z" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7 3.5V7L9.33333 8.16667" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                                    @if($order->userBuyer()->first()->detailUser->photo != NULL)
+                                                        <img class="object-cover w-full h-full rounded-full" src="{{ Storage::url($order->userBuyer()->first()->detailUser->photo) }}" alt="" loading="lazy" />
+                                                    @else
+                                                        <svg class="w-full h-full rounded-full object-cover text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                        </svg>
+                                                    @endif
 
-                                        3 days left
-                                    </td>
-                                    <td class="px-1 py-5 text-sm">
-                                        <a href="{{ route('member.order.show', 1) }}" class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
-                                            Details</a>
-                                        <a href="{{ route('member.order.edit', 1) }}" class="px-4 py-2 mt-2 text-center text-white rounded-xl bg-serv-email">
-                                            Submit
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="text-gray-700 border-b">
-                                    <td class="px-1 py-5 text-sm w-2/8">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full" src="{{ url('https://randomuser.me/api/portraits/men/10.jpg') }}" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-black">{{ $order->userBuyer->name }}</p>
+                                                    <p class="text-sm text-gray-400">{{ $order->userBuyer()->first()->detailUser->role }}</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p class="font-medium text-black">Trisa Jenny</p>
-                                                <p class="text-sm text-gray-400">Icon Designer</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="w-2/6 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded" src="{{ url('https://randomuser.me/api/portraits/men/7.jpg') }}" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-black">
-                                                    Fix Any Issue on Your <br>
-                                                    WordPress Website
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <td class="w-2/6 px-1 py-5">
+                                            <div class="flex items-center text-sm">
+                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
 
-                                    <td class="px-1 py-5 text-xs text-red-500">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline mb-1">
-                                            <path d="M7.0002 12.8332C10.2219 12.8332 12.8335 10.2215 12.8335 6.99984C12.8335 3.77818 10.2219 1.1665 7.0002 1.1665C3.77854 1.1665 1.16687 3.77818 1.16687 6.99984C1.16687 10.2215 3.77854 12.8332 7.0002 12.8332Z" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7 3.5V7L9.33333 8.16667" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                                    @if($order->service->thumbnails->count())
+                                                        <img class="object-cover w-full h-full rounded" src="{{ Storage::url($order->service->thumbnails[0]->thumbnail) }}" alt="" loading="lazy" />
+                                                    @else
+                                                        <svg class="w-full h-full rounded object-cover text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                        </svg>
+                                                    @endif 
 
-                                        3 days left
-                                    </td>
-                                    <td class="px-1 py-5 text-sm">
-                                        <a href="#" class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
-                                            Accept
-                                        </a>
-                                        <a href="#" class="px-4 py-2 mt-2 text-left bg-white rounded-xl">
-                                            Reject
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="text-gray-700">
-                                    <td class="px-1 py-5 text-sm w-2/8">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full" src="{{ url('https://randomuser.me/api/portraits/men/12.jpg') }}" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-black">
+                                                        {{ $order->service->title }} <br> {{ $order->service->description }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p class="font-medium text-black">Joorudan</p>
-                                                <p class="text-sm text-gray-400">Full - Stack Developer</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="w-2/6 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded" src="{{ url('https://randomuser.me/api/portraits/men/5.jpg') }}" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-black">
-                                                    Create a UI Design <br>
-                                                    for Your Application
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
+                                        </td>
 
-                                    <td class="px-1 py-5 text-xs text-red-500">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline mb-1">
-                                            <path d="M7.0002 12.8332C10.2219 12.8332 12.8335 10.2215 12.8335 6.99984C12.8335 3.77818 10.2219 1.1665 7.0002 1.1665C3.77854 1.1665 1.16687 3.77818 1.16687 6.99984C1.16687 10.2215 3.77854 12.8332 7.0002 12.8332Z" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7 3.5V7L9.33333 8.16667" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                        <td class="px-1 py-5 text-xs text-red-500">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline mb-1">
+                                                <path d="M7.0002 12.8332C10.2219 12.8332 12.8335 10.2215 12.8335 6.99984C12.8335 3.77818 10.2219 1.1665 7.0002 1.1665C3.77854 1.1665 1.16687 3.77818 1.16687 6.99984C1.16687 10.2215 3.77854 12.8332 7.0002 12.8332Z" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M7 3.5V7L9.33333 8.16667" stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
 
-                                        3 days left
-                                    </td>
-                                    <td class="px-1 py-5 text-sm">
-                                        <a href="#" class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
-                                            Accept
-                                        </a>
-                                        <a href="#" class="px-4 py-2 mt-2 text-left bg-white rounded-xl">
-                                            Reject
-                                        </a>
-                                    </td>
-                                </tr>
+                                            {{ (strtotime($order->expired) - strtotime(date("Y-m-d"))) / 86400 }} days left
+                                        </td>
+                                        <td class="px-1 py-5 text-sm">
+                                            @if($order->order_status_id == '1' || $order->order_status_id == '2' || $order->order_status_id == '3')
+                                                <a href="{{ route('member.order.show', $order) }}" class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Details
+                                                </a>
+                                            @endif
+
+                                            @if($order->order_status_id == '1')
+                                                <p class="px-4 py-2 mt-2 inline text-left text-center text-green-500">Approved</p>
+                                            @elseif($order->order_status_id == '2')
+                                                <a href="{{ route('member.order.edit', $order) }}" class="px-4 py-2 mt-2 text-center text-white rounded-xl bg-serv-button">
+                                                    Submit
+                                                </a>
+                                            @elseif($order->order_status_id == '3')
+                                                <p class="px-4 py-2 mt-2 inline text-left text-center text-red-500">Rejected</p>
+                                            @elseif($order->order_status_id == '4')
+                                                <a href="{{ route('member.accept.order', $order) }}" class="px-4 py-2 mt-2 mr-2 text-center text-white rounded-xl bg-serv-button">
+                                                    Accept
+                                                </a>
+
+                                                <a href="{{ route('member.reject.order', $order) }}" class="px-4 py-2 mt-2 mr-2 text-center text-white rounded-xl bg-red-400">
+                                                    Reject
+                                                </a>
+                                            @endif
+
+
+                                        </td>
+                                    </tr>                                    
+                                @empty
+                                    
+                                @endforelse
+                              
                             </tbody>
                         </table>
                     </div>

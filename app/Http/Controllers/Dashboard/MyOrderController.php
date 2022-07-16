@@ -22,6 +22,7 @@ class MyOrderController extends Controller
     public function index()
     {
         $orders = Order::where('freelance_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+    
         return view('pages.dashboard.order.index', compact('orders'));
     }
 
@@ -61,7 +62,7 @@ class MyOrderController extends Controller
         $tagline = Tagline::where('service_id', $service->id)->get();
 
 
-        return view('pages.dashboard.order.detail',compact('service', 'thubnails', 'advantageServices', 'advantageUsers', 'tagline'));
+        return view('pages.dashboard.order.detail',compact('service', 'thumbnails', 'advantageServices', 'advantageUsers', 'tagline'));
     }
 
     /**
@@ -84,7 +85,18 @@ class MyOrderController extends Controller
      */
     public function update(UpdateMyOrderRequest $request, Order $order)
     {
-        // simpan file yang dikirim kena mhadang frontendnya kyapa
+        $path = '';
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            $path = $file->store('public/assets/order/' . $order->id);
+        };
+
+        $order->file = $path;
+        $order->note = $request->note;
+        $order->update();
+
+        toast()->success('Submit Order has been success');
+        return redirect()->route('member.order.index');
     }
 
     /**
